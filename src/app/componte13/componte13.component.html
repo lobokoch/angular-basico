@@ -1,0 +1,38 @@
+{{vetor | json}}
+
+<!-- FORMULÁRIO -->
+<form [formGroup]="formulario">
+    <input type="text" class="form-control" formControlName="id" placeholder="Id" readonly >
+    <input type="text"   class="form-control" formControlName="nome" placeholder="Nome">
+    <input type="number" class="form-control" formControlName="valor" placeholder="Valor">
+
+    <input type="button" class="btn btn-primary" value="Cadastrar"  *ngIf="btnCadastrar" (click)="cadastrar()"> 
+    <input type="button" class="btn btn-primary" value="Alterar"   *ngIf="!btnCadastrar" (click)="alterar()"> 
+    <input type="button" class="btn btn-primary" value="Remover"   *ngIf="!btnCadastrar" (click)="remover()"> 
+</form>
+
+<!-- TABELA -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Selecionar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (v of vetor; track $index) {
+            <tr>
+                <td>{{$index+1}}</td>
+                <td>{{v.id}}</td>
+                <td>{{v.nome}}</td>
+                <td>{{v.valor}}</td>
+                <td><button class="btn btn-primary" (click)="selecionarProduto($index)">Selecionar</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
